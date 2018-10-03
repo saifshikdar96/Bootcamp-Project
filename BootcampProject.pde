@@ -140,7 +140,7 @@ public void keyPressed() {
   }
 }
 
-// Positioning the dogeballs
+// Positioning the dodgeballs
 
 public void setBalls() {
   for (int i = 0; i < balls.length; i++) {
