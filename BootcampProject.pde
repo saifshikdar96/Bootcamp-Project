@@ -13,9 +13,7 @@ ArrayList<Food> foods;
 
 // Initializes three sound files
 
-SoundFile gameSoundtrack;
-SoundFile gameOver;
-SoundFile levelWin;
+SoundFile gameSoundtrack, gameOver, levelWin;
 
 // Initializes variables of type float and int
 
@@ -24,13 +22,14 @@ float yPos; // Centre of y axis
 int numOfFood;
 float speed = 60;
 float score = 0;
+float newScore;
 
 // Initializes variables of type boolean and String
 
 boolean inPlayMode = false;
-String endMessageLose = "Game Over!";
-String endMessageWin = "Congratulations! You Win!";
-String startGame = "Press Y to Start Game \n Press Z to Increase Difficulty \n Press X to Decrease Difficulty \n Collect the Yellow Squares \n Avoid the Red Balls  ";
+String endMessageLose;
+String endMessageWin = "Congratulations! You Win! \n Your score: " + newScore;
+String startGame = "Press Y to Start Game \n Press Z or X to Alternate Levels \n Collect the Yellow Squares \n Avoid the Red Balls  ";
 
 // Initializes color variables
 
@@ -67,10 +66,10 @@ public void draw()
 {
   background(254, 244, 232);
 
-  textSize(10);
+  textSize(30);
   fill(black);
-  text("Speed: " + speed, 60, height - 35);
-  text("Score: " + score, 150, height - 35);
+  text("level: " + changeLevels(), 60, height - 35);
+  text("Score: " + score, 250, height - 35);
 
   if (!inPlayMode) {
     textSize(30);
@@ -78,6 +77,12 @@ public void draw()
     fill(black);
     text(startGame, width/2, height/2);
   } else if (inPlayMode) {
+
+    background(254, 244, 232);
+    textSize(15);
+    fill(black);
+    text("speed: " + speed, 60, height - 35);
+    text("Score: " + score, 250, height - 35);
 
     if (numOfFood < 10)
     {
@@ -94,6 +99,8 @@ public void draw()
       textSize(30);
       fill(black);
       levelWin.play();
+      newScore = score;
+      endMessageWin = "Congratulations! You Win! \n Your score: " + newScore;
       text(endMessageWin, width/2, height/2);
       frameRate(0);
       inPlayMode = false;
@@ -112,6 +119,8 @@ public void draw()
         textSize(30);
         fill(black);
         gameOver.play();
+        newScore = score;
+        endMessageLose = "Game Over! \n Your score: " + newScore;
         text(endMessageLose, width/2, height/2);
         frameRate(0);
         inPlayMode = false;
@@ -148,4 +157,15 @@ public void setBalls() {
     yPos = /*random(1, 799)*/0;
     balls[i] = new Ball(xPos, yPos);
   }
+}
+
+public int changeLevels() {
+  if (speed == 60) {
+    return 1;
+  } else if (speed == 80) {
+    return 2;
+  } else if (speed == 100) {
+    return 3;
+  } 
+  return 0;
 }
