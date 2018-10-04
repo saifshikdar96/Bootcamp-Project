@@ -65,13 +65,13 @@ public void setup()
 public void draw()
 {
   background(254, 244, 232);
-
-  textSize(30);
-  fill(black);
-  text("level: " + changeLevels(), 60, height - 35);
-  text("Score: " + score, 250, height - 35);
-
+  
   if (!inPlayMode) {
+    background(254, 244, 232);
+    textSize(30);
+    fill(black);
+    text("level: " + changeLevels(), 60, height - 35);
+    text("Score: " + score, 250, height - 35);
     textSize(30);
     textAlign(CENTER, CENTER);
     fill(black);
